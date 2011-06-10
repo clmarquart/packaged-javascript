@@ -1,0 +1,108 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <title>Page 2 - JavaScript Package Example</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link href="eval.css" type="text/css" rel="stylesheet" />
+    <style>
+      #menu ul { display:block; }
+    </style>
+  </head>
+  <body>
+    <div id="wrapper">
+      <div id="header">
+        <h1><a href="/projects/javascript-package-importer/">JavaScript Package Importer Demo</a></h1>
+      </div>
+      <div id="sidebar">
+        <div id="menu">
+          <span>Menu</span>
+          <ul>
+            <li><a href="demo.html">Page 1</a></li>
+            <li><a href="demo-2.html">Page 2</a></li>
+            <li><a href="demo-3.html">Page 3</a></li>
+          </ul>
+        </div>
+        <div id="demoLinks">
+          <a href="eval.html">Packaged Demo</a>
+          <br />
+          <span>Standard Demo</span>     
+        </div>
+      </div>
+      <div id="content">
+        <span id="click-here">Click Here</span>
+        <br /><br />
+        <p id="desc">
+          Attaches a jQuery UI dialog box to the "Click here" link.
+        </p>
+      <p id="desc">
+        <a href="images/demo2.png">Waterfall Chart</a> (this page is on the top)
+      </p>
+<pre>
+&lt;script type="text/javascript">
+      $("#click-here").bind("mouseover",function(){
+        $("body").append("&lt;div id='dialog'>Change the menu color?&lt;div>");
+        $("#dialog").dialog({
+          autoOpen: false,
+          buttons:{
+            Yes: function(){
+              Links.change();
+              $("#dialog").dialog("close");
+            },
+            No: function(){
+              $("#dialog").dialog("close");
+            }
+          }
+        });
+        Links.addEvent("#click-here");
+        $("#click-here").unbind("mouseover");
+      });
+&lt;/script>
+</pre>
+<pre>
+/*evaltest.links
+Links = {
+  node : null,
+  addEvent : function(node) {
+    this.node = $(node);
+    $(this.node).click(function() {
+      $("#dialog").dialog('open');
+    });
+  },
+  change : function () {
+    var span = $("#menu").children(":first");
+    if($(span).css("backgroundColor")==="red") {
+      $(span).css("backgroundColor","blue");
+    } else {
+      $(span).css("backgroundColor","red");
+    }
+  }
+};
+evaltest.links*/
+</pre>
+      </div>
+    </div>
+    <script type="text/javascript" src="js/libraries/test-lib.js"></script>
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/jqueryui.js"></script>
+    <script type="text/javascript">
+      $("#click-here").bind("mouseover",function(){
+        $("body").append("<div id='dialog'>Change the menu color?</div>");
+        $("#dialog").dialog({
+          autoOpen: false,
+          buttons:{
+            Yes: function(){
+              Links.change();
+              $("#dialog").dialog("close");
+            },
+            No: function(){
+              $("#dialog").dialog("close");
+            }
+          }
+        });
+        Links.addEvent("#click-here");
+        $("#click-here").unbind("mouseover");
+      });
+    </script>
+  </body>
+</html>    
+
