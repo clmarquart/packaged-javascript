@@ -1,0 +1,5 @@
+/*somelib
+(function(){
+	window.b = "somelib";
+})();
+somelib*/
