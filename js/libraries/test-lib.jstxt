@@ -2,13 +2,14 @@
 Menu = {
   parent : null,
   list : null,
-  create : function(id) {
-    Menu.parent = $("#"+id);
+  create : function(selector) {
+    Menu.parent = $(selector);
     Menu.list = $(this.parent).find("ul:eq(0)");
-    
-    $(this.parent)
-			.bind("click",function(){
-				$(Menu.list).toggle();
+
+    $(this.parent).find("li:has('ul')").find("> span")
+			.bind("click",function(ev){
+				ev.preventDefault();
+				$(this).next().toggle();
 			});
   }
 };
