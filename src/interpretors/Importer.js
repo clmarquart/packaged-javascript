@@ -16,10 +16,24 @@ WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER
 TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE
 USE OR PERFORMANCE OF THIS SOFTWARE.
 ************************************************************************/
+
 (function(){
+	var loggerOn = false
+	
+	/**
+	 * Main PackagedJS Object	
+	 *
+	 * window.JS
+	 */
   var JS = window.JS = new function() {
-    this.imported={},active=false;
+    this.imported={}; //,active=false;
     this.requests=[];
+		this.lastResult=false;
+
+		/**
+		 * JS.Wait - Insure proper order of execution
+		 *
+		 */
     this.Wait=function(request,func){
       if(JS.requests[request.order-1].done==false){
         setTimeout("JS.Wait(JS.requests["+request.order+"],"+func+")",200);
@@ -31,8 +45,14 @@ USE OR PERFORMANCE OF THIS SOFTWARE.
       	JS.requests[request.order].done = true;
       }
     };
+
+		/**
+		 * JS.Require - Load a Packaged JavaScript Library
+		 * 
+		 */
     this.Require=function(js,auto,callback) {
       var parentThis = this;
+			log("Loading the ", js, " package.");
       var request = XHR.get({
         url:js,
         success:function(newRequest,res){
@@ -60,6 +80,11 @@ USE OR PERFORMANCE OF THIS SOFTWARE.
       this.requests.push(request);
       return this;
     };
+
+		/**
+		 * JS.Save - Saves a packaged section for use later
+		 *
+		 */
     this.Save=function(js) {
       while(js.match(/^\/\*(.*)\n/)) {
         var executed = /^\/\*(.*)\n([\S|\s]*)\1\*\/$/m.exec(js);
@@ -67,26 +92,51 @@ USE OR PERFORMANCE OF THIS SOFTWARE.
         js = js.substr(executed[0].length).replace(/^\n/,"");
       }
     };
+		
+
+		/**
+		 * JS.Store - Stores the required JS to avoid multiple downloads
+		 *
+		 */
     this.Store=function(file,js){
     	JS.imported[file] = js;
     };
+
+		/**
+		 * JS.Use - Call a previously saved section from the loaded JavaScript Package
+		 *
+		 */
     this.Use=function(p,func) {
-      if (JS.active === true) {
+      if (JS.active === true){
+				log("JS is active, wait for ", p);
+        setTimeout("JS.Use('"+p+"',"+func+")",5);
+			} else if (typeof JS.imported[p] === "undefined") {
+				log(p, " is ", typeof JS.imported[p]);
         setTimeout("JS.Use('"+p+"',"+func+")",5);
       } else {
-        if (JS.imported[p]!==""){
-            eval(JS.imported[p]);
-            JS.imported[p] = "";
-          } else {
-            return false;
-          }
-          if (func) {
-            func();
-          }
+				if (JS.imported[p]!==""){
+					log("JS is loading ", p);
+					eval(JS.imported[p]);
+          JS.imported[p] = "";
+					lastResult=true;
+        } else {
+					log("JS can't find ", p);
+					lastResult=false;
+        }
+        if (func) {
+					log("Calling the callback for ", p);
+          func();
+        }
       }
+
       return this;
     };
   };
+
+	/**
+	 * Handle XHR Requests
+	 *
+	 */
   var XHR = {
     requests : [],
     get : function(request) {
@@ -115,10 +165,21 @@ USE OR PERFORMANCE OF THIS SOFTWARE.
     }
   };
 
+	/**
+	 * Once Importer.js has run its course, find its corresponding &lt;script/&gt; 
+	 * element to start evaluation of the embedded JavaScript
+	 *
+	 */
   var scripts = parent.document.getElementsByTagName("script");
   for(var x=0;x<scripts.length;x++){
     if((scripts[x].src) && (/Importer\.js/.test(scripts[x].src))) {
       eval(scripts[x].innerHTML);
     }
   }
+
+	function log(message) {
+		if(loggerOn){
+			console.log(message);
+		}
+	}
 })();
