@@ -1,0 +1,66 @@
+h2 { margin:0;padding:0;}
+pre {
+  float:left;
+  width:100%;
+  border:1px gray dashed;
+  padding:5px;
+  overflow:auto;
+  background:lightGrey;
+} 
+#wrapper {
+  width:780px;
+  margin:0 auto;
+}
+#header {
+  border:1px black solid;
+  margin:0 0 10px;
+  background: url('images/bg_h2.jpg') repeat-x;
+}
+  #header h1 {padding: 0px 20px;margin:0px;}
+    #header a {color:#FFF;}
+#sidebar { float:left; width:200px; height:100%;}
+  #menu {
+    float:left;
+    width:200px;
+    border:1px blue solid;
+    margin:0;
+  }
+    #menu span {
+      float:left;
+      width:200px;
+      border-bottom:1px blue solid;
+      background: blue;
+      color:#FFF;
+    }
+    #menu ul {
+      float:left;
+      margin:0;
+      padding:0;
+      list-style:none;
+      color:blue;
+      width:100%;
+      display:none;
+    }
+      #menu li, #menu span {
+        cursor:pointer;
+      }
+        #menu li {
+          padding:4px;
+          width:100%;
+        }
+  #demoLinks { float: left; font-size:80%;margin:20px 0 0;}
+#content {
+  float:left;
+  width:560px;
+  margin:10px 0;
+  padding:0 0 0 10px;
+}
+
+  #desc{ float:left;width:100%;margin:10px 0 0;padding:0;}
+  #click-here{cursor:pointer;text-decoration:underline;color:blue;}
+  
+  .ui-dialog { border:2px gray solid; background: #fff; }
+    .ui-dialog-titlebar { text-align:right;border-bottom:2px gray solid;background:gray;}
+      .ui-dialog-titlebar a {color:#fff;}
+    #dialog{ min-height:35px !important;}
+    .ui-dialog-buttonpane { text-align: right; }
