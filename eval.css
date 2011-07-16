@@ -1,4 +1,7 @@
+body {color: #50413A;}
 h2 { margin:0;padding:0;}
+a { color: gray; text-decoration:none; }
+	a:hover {text-decoration: underline;}
 pre {
   float:left;
   width:100%;
@@ -14,7 +17,7 @@ pre {
 #header {
   border:1px black solid;
   margin:0 0 10px;
-  background: url('images/bg_h2.jpg') repeat-x;
+  background: #50413A;
 }
   #header h1 {padding: 0px 20px;margin:0px;}
     #header a {color:#FFF;}
@@ -22,18 +25,24 @@ pre {
   #menu {
     float:left;
     width:200px;
-    border:1px blue solid;
+    border:1px #50413A solid;
     margin:0;
   }
-	/*
     #menu span {
-      float:left;
-      width:200px;
-      border-bottom:1px blue solid;
+    display: inline-block;
+    padding: 0 0 0 4px;
+    width: 196px;
+	/*
       background: blue;
       color:#FFF;
-    }
 	*/
+    }
+		#menu li:first-child {
+			border-top:none;
+		}
+		#menu span:hover {
+			text-decoration: underline;
+		}
     #menu ul {
       float:left;
       margin:0;
@@ -43,13 +52,13 @@ pre {
     }
 	  #menu ul ul {
 		display: none;
+		margin: 0 0 0 15px;
 	  }
       #menu li, #menu span {
         cursor:pointer;
       }
         #menu li {
           padding:4px;
-          width:100%;
         }
   #demoLinks { float: left; font-size:80%;margin:20px 0 0;}
 #content {
@@ -59,7 +68,7 @@ pre {
   padding:0 0 0 10px;
 }
 
-  #desc{ float:left;width:100%;margin:10px 0 0;padding:0;}
+  .desc{ float:left;width:100%;margin:10px 0 0;padding:0;}
   #click-here{cursor:pointer;text-decoration:underline;color:blue;}
   
   .ui-dialog { border:2px gray solid; background: #fff; }

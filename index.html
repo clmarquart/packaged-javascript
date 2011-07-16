@@ -2,28 +2,32 @@
 layout: default
 title: Packaged JavaScript
 ---
-    <p id="desc">
-        Create a click activated drop-down menu.
+	<p class="desc">
+		Packaged JavaScript aims to reduce the negative effect that JavaScript has on page load time.  In order to 
+		accomplish this, two techniques are brought together: JavaScript Loaders and Lazy Loading/Parsing of Scripts.
+	</p>
+    <p class="desc">
+		This is not an attempt to replace other JavaScript Loaders out there, more so to build on the concept.  In order
+		to do so, Packaged JavaScript takes an idea Google presented in oorder to reduce 
+		<a href='http://googlecode.blogspot.com/2009/09/gmail-for-mobile-html5-series-reducing.html'>Mobile Gmail Startup Latency</a>. 
+		Essentially, the idea is to comment out any JavaScript code that is not needed at the 
+		initial load of the page.  When the code is required, it is then eval'd for use by removing 
+		its surrounding block comment. 
     </p>
-    <p id="desc">
-		Some description
+    <p class="desc">
+		I wanted to take this idea to the next level. Combine multiple JavaScript files into one 
+		single file, leaving a JavaScript Package to be used throughout a site or application.
     </p>
-{% highlight js %}
-<script type="text/javascript" src="js/Importer.js">
-  JS.Require("js/libraries/test-lib.jstxt");
-
-  var themenu = document.getElementById("menu");
-  var createMenu = function(){
-        JS.Use("jquery",function(){
-          JS.Use("evaltest.menu",function(){
-            Menu.create("menu");
-            themenu.removeEventListener("mouseover",createMenu,false);
-          });
-        });
-    };
-  themenu.addEventListener("mouseover",createMenu,false);
-</script>
-{% endhighlight %}
+    <p class="desc">
+		<div>A few key features:</div>
+		<ol>
+			<li>On-Demand JavaScript Loading Parsing</li>
+			<li>Asynchronous Loading</li>
+			<li>Chainable Implementation</li>
+			<li>Lazy Parsed JavaScript</li>
+		</ol>
+    </p>
+	<h3>Example Package</h3>
 {% highlight text %}
 /*evaltest.menu
 Menu = {
