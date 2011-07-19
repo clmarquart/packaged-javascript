@@ -1,0 +1,69 @@
+---
+layout: default
+title: Accordion Menu | Packaged JavaScript
+permalink: /examples/accordion-menu.html
+category: examples
+---
+<h3>Using an Accordion Menu</h3>
+<p>
+	Below is the exact snippet as used by this site to create the left-hand menu.  It is followed by a copy
+	of the package library used as well.
+</p>
+{% highlight js %}
+<script src="/js/Importer.js" type="text/javascript">
+  JS.Require("/js/libraries/test-lib.jstxt");
+
+  var themenu = document.getElementById("menu");
+  var createMenu = function(){
+    JS.Use("jquery",function(){
+      JS.Use("accordion", function(){
+        $("#menu").accordion({"event":"click",speed:"fast"});
+        themenu.removeEventListener("mouseover",createMenu,false);
+      })
+    });
+  };
+  themenu.addEventListener("mouseover",createMenu,false);
+</script>
+{% endhighlight %}
+<h4>Package Library</h4>
+{% highlight text %}
+/*accordion
+(function($){
+  $.fn.accordion = function(opts) {
+  	var options = $.extend({"event":"click","single":true,"speed":"slow",memory:true},opts);
+    if(typeof window.sliders=="undefined")window.sliders={};
+    return this.each(function(){
+      window.sliders[this.id]=(new Accordion(this,options)).init(window.sliders.length);
+    });
+  }
+  function Accordion(e,opts) {
+    this.options=opts;
+    this.init=function(){
+      $(e).addClass("slider-nav").find("ul:not(:first)").hide();
+      if((opts.event==="click")||(opts.event==="mouseover"))
+        $(e).find("span").bind(opts.event,showLevel);
+      else if (opts.event==="hover")
+        $(e).find("span").hover(showLevel,function(){$(this).find("li").mouseout(showLevel);});
+      $(e).find("ul ul li:has(span)").find("span").addClass("slider-sub-parent");
+      return this;
+    }
+  }
+  function showLevel(s) {
+    var src=(s.target)?s.target:s.srcElement;
+    var opts=window.sliders[$(src).closest(".slider-nav").attr("id")].options;
+    var pl=$(src).next().addClass("slider-active");
+    if($(pl).is(":visible")){
+      $(pl).slideUp(opts.speed);
+      if(!opts.memory) $(pl).find("li ul").slideUp(opts.speed);
+    }else{
+      if(opts.single) $(src).closest(".slider-nav").find("li ul:not(:has(.slider-active))").slideUp(opts.speed);
+      $(src).next().slideDown(opts.speed).end().parent().parents("ul").each(function(){$(this).slideDown(opts.speed)});
+    }
+    $(pl).removeClass("slider-active");
+  }
+})(jQuery);
+accordion*/
+/*jquery
+   ...jQuery...
+jquery*/
+{% endhighlight %}

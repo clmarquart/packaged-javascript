@@ -1,0 +1,34 @@
+---
+layout: default
+title: Packaged JavaScript
+permalink: /examples/example-library.html
+category: examples
+---
+<h3>Example Library</h3>
+<p>
+	A packaged library consists of multiple different JavaScript files and functionality. The library is 
+	segmented into named modules as shown below.  
+</p>
+{% highlight text %}
+/*evaltest.menu
+(function(){
+  Menu = {
+    parent : null,
+    list : null,
+    create : function(id) {
+      Menu.parent = $("#"+id);
+      Menu.list = $(this.parent).find("ul:eq(0)");
+
+      $(Menu.parent)
+        .bind("click",function(){
+          $(Menu.list).toggle();
+      });
+    }
+  };
+})();
+evaltest.menu*/
+
+/*jquery
+  ...jQuery...
+jquery*/
+{% endhighlight %}

@@ -3,33 +3,35 @@
 	<head>
 		<title>Packaged JavaScript and Loader</title>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-		<link href="eval.css" type="text/css" rel="stylesheet" media="all" />
-		<link href="style/syntax.css" type="text/css" rel="stylesheet" media="all" />
+		<link href="{{site.base-url}}eval.css" type="text/css" rel="stylesheet" media="all" />
+		<link href="{{site.base-url}}style/syntax.css" type="text/css" rel="stylesheet" media="all" />
 	</head>
 	<body>
 	    <div id="wrapper">
-			<div id="header">
-		        <h1><a href="#">/*Packaged.JavaScript*/</a></h1>
+			<div id="header" class="borderFive">
+		        <h1><a href="{{site.base-url}}">/*Packaged.JavaScript*/</a></h1>
 				<a href="http://github.com/clmarquart/packaged-javascript/"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://gs1.wac.edgecastcdn.net/80460E/assets/img/71eeaab9d563c2b3c590319b398dd35683265e85/687474703a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f677261795f3664366436642e706e67" alt="Fork me on GitHub" /></a>
 			</div>
 			<div id="sidebar">
-				<div id="menu">
+				<div id="menu" class="borderFive">
 	          		<ul>
 		            	<li><span>On GitHub</span>
 							<ul>
-					            <li><a href="#">Browse Source</a></li>
-					            <li><a href="#">Wiki</a></li>
+					            <li><a href="http://github.com/clmarquart/packaged-javascript/">Browse Source</a></li>
+					            <li><a href="http://github.com/clmarquart/packaged-javascript/">Wiki</a></li>
 				           	</ul>
 						</li>
 						<li><span>Examples</span>
 							<ul>
-								
+								<li><a href="{{site.base-url}}examples/example-library.html">Example Library</a></li>
+								<li><a href="{{site.base-url}}examples/proof-of-concept.html">Proof of Concept</a></li>
+								<li><a href="{{site.base-url}}examples/accordion-menu.html">Accordion Menu</a></li>
 							</ul>
 						</li>
 			            <li><span>Documentation</span>
 							<ul>
-					            <li><a href="#">How It Works</a></li>
-					            <li><a href="#">Why You Should Use It</a></li>
+					            <li><a href="{{site.base-url}}/docs/how-it-works.html">How It Works</a></li>
+					            <li><a href="{{site.base-url}}">Why You Should Use It</a></li>
 				           	</ul>
 						</li>
 					    <li><span>Issues</span>
@@ -45,16 +47,26 @@
 				{{content}}
 			</div>
 		</div>
-	  	<script src="js/Importer.js" type="text/javascript">
-	      JS.Require("js/libraries/test-lib.jstxt");
+		<script type="text/javascript">
+			var  proof = document.getElementById("proof")
+				,proof2 = document.getElementById("proof2");
+			if(proof) proof.innerHTML = (typeof jQuery);
+			if(proof2)proof2.innerHTML = (typeof jQuery != 'undefined')?(typeof jQuery.fn.accordion):'undefined';
+		</script>
+	  	<script src="{{site.base-url}}js/Importer.js" type="text/javascript">
+	      JS.Require("{{site.base-url}}js/libraries/test-lib.jstxt");
 
 	      var themenu = document.getElementById("menu");
 	      var createMenu = function(){
-	            JS.Use("jquery",function(){
-	              JS.Use("evaltest.menu",function(){
-									Menu.create("#menu");
-	                themenu.removeEventListener("mouseover",createMenu,false);
-	              });
+          		JS.Use("jquery",function(){
+				  JS.Use("accordion", function(){
+					  if(proof) {
+						proof.innerHTML = (typeof jQuery);
+						proof2.innerHTML = (typeof jQuery.fn.accordion);
+					  }
+					 $("#menu").accordion({"event":"click",speed:"fast"});
+			      	themenu.removeEventListener("mouseover",createMenu,false);
+				  })
 	            });
 	      };
 	      themenu.addEventListener("mouseover",createMenu,false);

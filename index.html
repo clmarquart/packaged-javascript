@@ -27,21 +27,3 @@ title: Packaged JavaScript
 			<li>Lazy Parsed JavaScript</li>
 		</ol>
     </p>
-	<h3>Example Package</h3>
-{% highlight text %}
-/*evaltest.menu
-Menu = {
-  parent : null,
-  list : null,
-  create : function(id) {
-    Menu.parent = $("#"+id);
-    Menu.list = $(this.parent).find("ul:eq(0)");
-
-    $(Menu.parent)
-      .bind("click",function(){
-        $(Menu.list).toggle();
-      });
-  }
-};
-evaltest.menu*/
-{% endhighlight %}

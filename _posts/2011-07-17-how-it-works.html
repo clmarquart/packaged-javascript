@@ -1,0 +1,25 @@
+---
+layout: default
+title: How Packaged JavaScript Works
+permalink: /docs/how-it-works.html
+category: documentation
+---
+<h3>Requirements</h3>
+<ol>
+	<li><a href="{{site.base-url}}/js/Importer.js">Importer.js</a> - loads and parses the JavaScript packages</li>
+	<li>JavaScript package, see <a href="{{site.base-url}}/docs/configuration.html">conifiguration</a></li>
+</ol>
+<h3>Package Configuration</h3>
+<div>
+	Packages are pretty simple.  It consists numerous different JavaScript files, combined into one single file.
+	The difference though, is that everything in the packaged file is divided into named segments, and loaded as 
+	plain text.
+</div>
+{% highlight text %}
+/*navigation
+	...some code for navigation drop-downs...
+navigation*/
+/*jquery
+	...jQuery code...
+jquery*/
+{% endhighlight %}

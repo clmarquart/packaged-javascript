@@ -1,0 +1,27 @@
+---
+layout: default
+title: Accordion Menu | Packaged JavaScript
+permalink: /examples/proof-of-concept.html
+category: examples
+---
+<h3>Proof of Concept</h3>
+<p>
+	To prove the concept, you can see below that the objects, at page load, are `undefined`.  If 
+	you hover over the left navigation, you will see that it changes as the JavaScript is loaded for
+	use by the navigation menu.
+</p>
+<p>
+	An important thing to note, there is <strong>no loss in functionality</strong>.  The accordion style navigation
+	works just as expected.
+</p>
+<h4>Test Objects</h4>
+<div><span><b>jQuery is:</b> </span><span id="proof">`undefined`</span></div>
+<div><span><b>jQuery.fn.accordion is:</b> </span><span id="proof2">`undefined`</span></div>
+{% highlight js %}
+<script type="text/javascript">
+  var proof = document.getElementById("proof")
+     ,proof2 = document.getElementById("proof2");
+  if(proof) proof.innerHTML = (typeof jQuery);
+  if(proof2)proof2.innerHTML = (typeof jQuery != 'undefined')?(typeof jQuery.fn.accordion):'undefined';
+</script>
+{% endhighlight %}
