@@ -10,7 +10,7 @@
 	    <div id="wrapper">
 			<div id="header" class="borderFive">
 		        <h1><a href="{{site.base-url}}">/*Packaged.JavaScript*/</a></h1>
-				<a href="http://github.com/clmarquart/packaged-javascript/"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://gs1.wac.edgecastcdn.net/80460E/assets/img/71eeaab9d563c2b3c590319b398dd35683265e85/687474703a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f677261795f3664366436642e706e67" alt="Fork me on GitHub" /></a>
+				<a href="http://github.com/you"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://a248.e.akamai.net/assets.github.com/img/7afbc8b248c68eb468279e8c17986ad46549fb71/687474703a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub"></a>
 			</div>
 			<div id="sidebar">
 				<div id="menu" class="borderFive">
@@ -24,7 +24,7 @@
 						</li>
 			            <li><span>Documentation</span>
 							<ul>
-					            <li><a href="{{site.base-url}}/docs/how-it-works.html">How It Works</a></li>
+					            <li><a href="{{site.base-url}}docs/how-it-works.html">How It Works</a></li>
 					            <li><a href="{{site.base-url}}">Why You Should Use It</a></li>
 				           	</ul>
 						</li>
@@ -58,16 +58,16 @@
 
 	      var themenu = document.getElementById("menu");
 	      var createMenu = function(){
-          		JS.Use("jquery",function(){
-				  JS.Use("accordion", function(){
-					  if(proof) {
-						proof.innerHTML = (typeof jQuery);
-						proof2.innerHTML = (typeof jQuery.fn.accordion);
-					  }
-					 $("#menu").accordion({"event":"click",speed:"fast"});
-			      	themenu.removeEventListener("mouseover",createMenu,false);
-				  })
-	            });
+			  JS.Use("jquery",function(){
+			  JS.Use("accordion", function(){
+				  if(proof) {
+					proof.innerHTML = (typeof jQuery);
+					proof2.innerHTML = (typeof jQuery.fn.accordion);
+				  }
+				 $("#menu").accordion({"event":"click",speed:"fast"});
+		      	themenu.removeEventListener("mouseover",createMenu,false);
+			  })
+            });
 	      };
 	      themenu.addEventListener("mouseover",createMenu,false);
 	    </script>
