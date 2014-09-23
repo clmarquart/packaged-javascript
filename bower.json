@@ -1,0 +1,9 @@
+{
+  "name": "packaged-javascript",
+  "version": "0.1.0",
+  "homepage": "https://github.com/clmarquart/packaged-javascript",
+  "authors": [
+    "Cody Marquart <clmarquart@gmail.com>"
+  ],
+  "main": "src/interpretors/Importer.js"
+}
